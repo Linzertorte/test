@@ -1,0 +1,31 @@
+name 				Connor Dunrossil
+birthday			08-04-1961
+phone				0261960475
+medicalHistory		None
+
+
+name 				Mary Beor
+birthday			26-11-1972
+phone				0353336907
+email				MaryBeor@spambob.com
+address				16 Yarra Street, LAWRENCE, VIC, Australia
+medicalHistory		None
+
+
+name				Jade Cumberlege
+birthday			1-01-1933
+phone				0298031463
+email				JadeCumberlege@spambob.com
+address				71 Oriana Street, WARNERVALE, NSW, Australia
+medicalHistory		11-12-1953 flu
+					31-05-1955 stomachache
+					04-07-1955 allergic to milk 
+
+
+name 				Mitchell Camidge
+birthday 			03-03-1935
+phone 				0749123670
+email 				MitchellCamidge@spambob.com
+address 			77 Hay Point Road, SLADE POINT, QLD, Australia
+medicalHistory		None
+
