@@ -4,7 +4,8 @@ import java.util.regex.Matcher;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
-
+import java.io.File; 
+import java.io.FileNotFoundException;
 public class Parser {
 
 	/**
@@ -135,9 +136,18 @@ public class Parser {
 	}
 
 	public static void main(String[] args) {
-
+		
+		
+		File inputFile = new File(args[0]);
+		
 		ArrayList<MedicalRecord> medicalRecordList = new ArrayList<MedicalRecord>();
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner=null;
+		try {
+			scanner = new Scanner(inputFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String line = "";
 
 		while (scanner.hasNextLine()) {
