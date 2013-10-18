@@ -22,9 +22,10 @@ public class Parser {
 			.compile("^\\s+([A-Za-z0-9\\s,]+)$");
 	private static Pattern emailPattern = Pattern
 			.compile("^email\\s+([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+)$");
+	private static String previousLine = "";
 
-	static void updateMedicalRecordbyInputLine(MedicalRecord medicalRecord,
-			String line) {
+	static boolean updateMedicalRecordbyInputLine(MedicalRecord medicalRecord,
+			String line, Scanner scanner) {
 		Matcher nameMatcher = namePattern.matcher(line);
 		Matcher birthdayMatcher = birthdayPattern.matcher(line);
 		Matcher phoneMatcher = phonePattern.matcher(line);
@@ -38,11 +39,33 @@ public class Parser {
 			medicalRecord.setPhone(Integer.parseInt(phoneMatcher.group(1)));
 		} else if (addressMatcher.matches()) {
 			medicalRecord.setAddress(addressMatcher.group(1));
+			if (scanner.hasNextLine()) {
+				line = scanner.nextLine();
+				previousLine = line;
+			}
+			else {
+				return true;
+			}
+			Matcher addressMatcherAdditional = addressPatternAdditional
+					.matcher(line);
+			while (addressMatcherAdditional.matches()) {
+				medicalRecord.setAddress(medicalRecord.getAddress()
+						+ addressMatcherAdditional.group(1));
+				if (!scanner.hasNextLine())
+					break;
+				line = scanner.nextLine();
+				previousLine = line;
+				addressMatcherAdditional = addressPatternAdditional
+						.matcher(line);
+				
+			}
+
+			return false;
 
 		} else if (emailMatcher.matches()) {
 			medicalRecord.setEmail(emailMatcher.group(1));
 		}
-
+		return true;
 	}
 
 	public static void main(String[] args) {
@@ -60,10 +83,16 @@ public class Parser {
 			}
 			MedicalRecord medicalRecord = new MedicalRecord();
 			while (!line.equals("")) {
-				updateMedicalRecordbyInputLine(medicalRecord, line);
-				if (!scanner.hasNextLine())
-					break;
-				line = scanner.nextLine();
+				if (updateMedicalRecordbyInputLine(medicalRecord, line, scanner)) {
+					if (!scanner.hasNextLine())
+						break;
+					line = scanner.nextLine();
+				}
+				else {
+					line = previousLine;
+					previousLine = "";
+				}
+				
 			}
 			System.out.println(medicalRecord);
 			medicalRecordList.add(medicalRecord);
