@@ -58,10 +58,22 @@ public class MedicalRecord {
 		this.medicalHistory = medicalHistory;
 	}
 	@Override
-	public String toString() {
+	public String toString(){
+		String medicalHistoryString="";
+		if(medicalHistory==null) medicalHistoryString="\t\tNone";
+		else {
+			for(MedicalHistoryEntry medicalHistoryEntry:medicalHistory){
+				medicalHistoryString += "\t\t\t\t" + medicalHistoryEntry.toString();
+			}
+		}
+		return "name\t\t\t\t" + name + "\nbirthday\t\t\t" + birthday
+				+ "\nphone\t\t\t\t" + phone + "\naddress\t\t\t\t" + address + "\nemail\t\t\t\t"
+				+ email + "\nmedicalHistory" + medicalHistoryString + "\n";
+	}
+	/*public String toString() {
 		return "MedicalRecord [name=" + name + ", birthday=" + birthday
 				+ ", phone=" + phone + ", address=" + address + ", email="
 				+ email + ", medicalHistory=" + medicalHistory + "]";
-	}
+	}*/
 	
 }

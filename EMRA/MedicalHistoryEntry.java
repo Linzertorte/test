@@ -19,9 +19,8 @@ public class MedicalHistoryEntry {
 	
 	@Override
 	public String toString() {
-		return "MedicalHistoryEntry [diagnosisInformation="
-				+ diagnosisInformation + ", dateOfDiagnosis=" + dateOfDiagnosis
-				+ "]";
+		return dateOfDiagnosis+" "+diagnosisInformation+"\n";
+				
 	}
 	
 	
