@@ -1,5 +1,5 @@
     cd EMRA
     javac *.java
     cd ..
-    java EMRA/Parser EMRA/records03.txt
+    java EMRA/EMR EMRA/records03.txt
     
