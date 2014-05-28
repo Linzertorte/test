@@ -30,7 +30,9 @@ def remove_watermark(source, destination=None):
 
 
 if __name__ == '__main__':
-    """Usage ./watermark.py source.pdf [destination.pdf]
+    """A script that removes watermark footer from e-books downloaded
+    from www.it-ebook.info
+    Usage ./watermark.py source.pdf [destination.pdf]
     """
     remove_watermark(*sys.argv[1:])
 
