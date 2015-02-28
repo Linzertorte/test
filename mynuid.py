@@ -21,5 +21,3 @@ def get_nuid(user,pwd):
 
 if __name__ == '__main__':
   print 'Your NUID is', get_nuid(sys.argv[1],sys.argv[2])
-~                                                                                                 
-~                                                             
