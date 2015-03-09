@@ -7,7 +7,7 @@ print """<!DOCTYPE html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Simple markers</title>
+    <title>吉大北美校友分布图</title>
     <style>
       html, body, #map-canvas {
         height: 100%;
