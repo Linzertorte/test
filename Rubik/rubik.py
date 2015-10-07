@@ -5,7 +5,31 @@ import random
 # change seq visulize your rotations
 # press space to watch next rotation
 seq = [1,2,-1,2,-3,5,-5,6]
+board = [["YYY",
+          "YYY",
+          "YYY"],
+         ["BBB",
+          "BBB",
+          "BBB"],
+         ["GGG",
+          "GGG",
+          "GGG"],
+         ["MMM",
+          "MMM",
+          "MMM"],
+         ["WWW",
+          "WWW",
+          "WWW"],
+         ["RRR",
+          "RRR",
+          "RRR"]]
 
+colors = {'Y':'yellow',
+          'B':'blue',
+          'G':'green',
+          'M':'orange',
+          'R':'red',
+          'W':'pink'}
 
 
 def up_face(x,y,k):
@@ -30,24 +54,7 @@ ox,oy,k = 200,200,10 # center, scale
 for x,y,f in [(-6,0,face),(0,0,face),(6,0,right_face),(9,-3,face),(3,-3,up_face),(0,6,face),]:
   faces.append(f(x*k+ox,y*k+oy,k))
 
-board = [["YYY",
-          "YYY",
-          "YYY"],
-         ["BBB",
-          "BBB",
-          "BBB"],
-         ["GGG",
-          "GGG",
-          "GGG"],
-         ["MMM",
-          "MMM",
-          "MMM"],
-         ["WWW",
-          "WWW",
-          "WWW"],
-         ["RRR",
-          "RRR",
-          "RRR"]]
+
 
 rot1 = [[(1,0,0),(1,0,1),(1,0,2),(1,1,2),(1,2,2),(1,2,1),(1,2,0),(1,1,0)],
        [(2,0,0),(2,0,1),(2,0,2),(2,1,2),(2,2,2),(2,2,1),(2,2,0),(2,1,0)],
@@ -82,13 +89,6 @@ def rotate(x):
   for k in xrange(12):
     f,i,j = rot2[x][k]
     board[f-1][i][j] = b2[k]
-
-colors = {'Y':'yellow',
-          'B':'blue',
-          'G':'green',
-          'M':'orange',
-          'R':'red',
-          'W':'pink'}
 
 board = [[list(line) for line in f] for f in board]
 
