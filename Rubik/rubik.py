@@ -1,10 +1,13 @@
 from graphics import *
 import random
 
-
 # change seq visulize your rotations
 # press space to watch next rotation
-seq = [1,2,-1,2,-3,5,-5,6]
+#seq = [random.randint(-5,6) for i in xrange(15)]
+#seq = map(lambda x: x-1 if x<=0 else x,seq)
+scramble_seq = []
+seq = [3,-4]
+print seq
 board = [["YYY",
           "YYY",
           "YYY"],
@@ -103,12 +106,22 @@ def draw_rubik(win):
         poly.setWidth(2)
         poly.draw(win)
 
+def print_board():
+  global board
+  board = [[''.join(i) for i in f]  for f in board]
+  for i in board[4]:
+    print i
+
+  for i in xrange(3):
+    print board[0][i] + board[1][i] + board[2][i] + board[3][i] 
+  for i in board[5]:
+    print i
+
 def main():
     global seq
     win = GraphWin('Rubik', 400,400) # give title and dimensions
-    #seq = [random.randint(-5,6) for i in xrange(15)]
-    #seq = map(lambda x: x-1 if x<=0 else x,seq)
-    #print seq
+    for x in scramble_seq:
+      rotate(x)
     draw_rubik(win)
     win.getKey()
     for x in seq:
@@ -119,7 +132,7 @@ def main():
       win.getKey()
       label.undraw()
       win.flush
+    print_board()
     win.getMouse()
     win.close()
-
 main()
