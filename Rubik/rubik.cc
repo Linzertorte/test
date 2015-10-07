@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <ctime>
 #include <unordered_map>
 #include <map>
 #include <queue>
@@ -151,6 +152,30 @@ int main()
     for(int i=0;i<3;i++)
         for(int j=0;j<3;j++)
         scanf(" %c",&c),face[6][i][j]=get_color_id(c);
+    cout<<"all colors:"<<endl;
+    for(int i=0;i<6;i++){
+      if(i)cout<<" ";
+      cout<<color[i];
+    }
+    cout<<endl;
+    cout<<"[";
+    for(int f=1;f<=6;f++){
+       cout<<"[";
+       for(int i=0;i<3;i++){
+         cout<<"\"";
+         for(int j=0;j<3;j++)
+           cout<<color[face[f][i][j]];
+         cout<<"\"";
+         if(i!=2)cout<<","<<endl;
+       }
+       cout<<"]";
+       if(f!=6)cout<<","<<endl;
+    }
+    cout<<"]"<<endl;
+    
+    
+    clock_t begin = clock();
+    clock_t end;
     for(int i=0;i<6;i++) goal.face[i] = magic[i];
     Rubik start = encode();
     int cnt = 0;
@@ -184,6 +209,8 @@ int main()
                         print_answer(next,1);
                         cout<<endl;
                         cout<<"I solved it!"<<endl;
+   			end = clock();
+                        cout<<double(end-begin)/CLOCKS_PER_SEC<<endl;
                         return 0;
                     }
                     if(tbl[0].find(next)==tbl[0].end()){
@@ -214,6 +241,8 @@ int main()
                         print_answer(head,1);
                         cout<<endl;
                         cout<<"I solved it!"<<endl;
+                        end = clock();
+                        cout<<double(end-begin)/CLOCKS_PER_SEC<<endl;
                         return 0;
                     }
                     if(tbl[1].find(next)==tbl[1].end()){
@@ -227,21 +256,8 @@ int main()
         }
         if(done) break;
     }
-    
+    end = clock();
+    cout<<double(end-begin)/CLOCKS_PER_SEC<<endl;
     cout<<"Cannot solve it..."<<endl;
     return 0;
 }
-
-/*
-
-BBB
-BPP
-GGO
-GGOPOYPBYRRR
-PYPGBYRGOPOY
-OOPGBPBRRGGR
-BYY
-YRO
-YRO
-
-*/
