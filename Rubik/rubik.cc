@@ -13,6 +13,14 @@ bool operator==(const Rubik & r1, const Rubik &r2){
     for(int i=0;i<6;i++) if(r1.face[i]!=r2.face[i]) return false;
     return true;
 }
+bool operator<(const Rubik & r1, const Rubik &r2){
+    for(int i=0;i<6;i++) {
+        if(r1.face[i]<r2.face[i]) return true;
+        if(r1.face[i]>r2.face[i]) return false;
+    }
+    return false;
+}
+
 struct RubikHasher
 {
     size_t operator()(const Rubik& k) const{
@@ -82,15 +90,9 @@ void rotate(int x){
         face[t.f][t.i][t.j]= b2[k];
     }
 }
-bool check(){
-    for(int i=1;i<=6;i++)
-    for(int j=0;j<3;j++)
-    for(int k=0;k<3;k++)
-    if(face[i][j][k]!=face[i][0][0]) return false;
-    return true;
-}
 
-unordered_map<Rubik, int,RubikHasher> tbl;
+unordered_map<Rubik, int,RubikHasher> tbl[2];
+//map<Rubik, int> tbl[2];
 map<char,int> color_id;
 vector<char> color;
 inline int get_color_id(char c){
@@ -121,16 +123,21 @@ Rubik encode(){
     }
     return rubik;
 }
-queue<Rubik> Q;
-void print_answer(const Rubik &rubik){
-    int k = tbl[rubik];
+queue<Rubik> P;
+queue<Rubik> Q[720];
+
+void print_answer(const Rubik &rubik,int c){
+    int k = tbl[c][rubik];
     if(k==0) return;
     decode(rubik);
     rotate(-k);
     Rubik prev = encode();
-    print_answer(prev);
-    cout<<k<<",";
+    if(c==1)cout<<-k<<",";
+    print_answer(prev,c);
+    if(c==0)cout<<k<<",";
 }
+Rubik goal;
+const int magic[6] = {0,2015539,4031078,6046617,8062156,10077695};
 int main()
 {
     char c;
@@ -144,33 +151,87 @@ int main()
     for(int i=0;i<3;i++)
         for(int j=0;j<3;j++)
         scanf(" %c",&c),face[6][i][j]=get_color_id(c);
+    for(int i=0;i<6;i++) goal.face[i] = magic[i];
     Rubik start = encode();
-    Q.push(start);
-    tbl[start] = 0; //which rotate lead to this
-    while(!Q.empty()){
-        Rubik head = Q.front();
-        Q.pop();
-        decode(head);
-        if(check()){
-            cout<<"I solved it"<<endl;
-            print_answer(head);
-            cout<<endl;
-            break;
-        }
-        Rubik next;
-        for(int k=-6;k<=6;k++){
-            if(k==0) continue;
-            rotate(k);
-            next = encode();
-            if(tbl.find(next)==tbl.end()){
-                tbl[next] = k;
-                Q.push(next);
-            }
-            rotate(-k);
-        }
+    int cnt = 0;
+    do{
+        Q[cnt++].push(goal);
+        tbl[1][goal] = 0;
+    }while(next_permutation(goal.face, goal.face+6));
+    if(tbl[1].find(start)!=tbl[1].end()){
+        cout<<"Already solved!";
+        return 0;
     }
+    tbl[0][start] = 0;
+    P.push(start);
+    Rubik head,next;
+    while(true){
+        bool done = true;
+        if(!P.empty()){
+            done = false;
+            int k = (int)P.size();
+            while(k--){
+                head = P.front();
+                P.pop();
+                decode(head);
+                for(int d=-6;d<=6;d++){
+                    if(d==0)continue;
+                    rotate(d);
+                    next = encode();
+                    if(tbl[1].find(next)!=tbl[1].end()){
+                        print_answer(head,0);
+                        cout<<d<<",";
+                        print_answer(next,1);
+                        cout<<endl;
+                        cout<<"I solved it!"<<endl;
+                        return 0;
+                    }
+                    if(tbl[0].find(next)==tbl[0].end()){
+                        tbl[0][next] = d;
+                        P.push(next);
+                    }
+                    rotate(-d);
+                
+                }
+            }
+            
+        }
+        for(int i=0;i<720;i++)
+        if(!Q[i].empty()){
+            done = false;
+            int k = (int)Q[i].size();
+            while(k--){
+                head = Q[i].front();
+                Q[i].pop();
+                decode(head);
+                for(int d=-6;d<=6;d++){
+                    if(d==0) continue;
+                    rotate(d);
+                    next = encode();
+                    if(tbl[0].find(next)!=tbl[0].end()){
+                        print_answer(next,0);
+                        cout<<-d<<",";
+                        print_answer(head,1);
+                        cout<<endl;
+                        cout<<"I solved it!"<<endl;
+                        return 0;
+                    }
+                    if(tbl[1].find(next)==tbl[1].end()){
+                        tbl[1][next] = d;
+                        Q[i].push(next);
+                    }
+                    rotate(-d);
+                }
+                
+            }
+        }
+        if(done) break;
+    }
+    
+    cout<<"Cannot solve it..."<<endl;
     return 0;
 }
+
 /*
 
 BBB
