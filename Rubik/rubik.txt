@@ -1,0 +1,50 @@
+5 step, very fast
+
+W W W
+W W W
+W Y Y
+B B B G R R B M M Y Y Y
+Y Y Y B B G W G G M M M
+M M G R R M Y B G W G G
+B B R
+R R G
+R R M
+
+
+10 step shuffle, time out
+
+BGO
+BPO
+BPO
+YRRGBGRRPGOP
+PYYRBBGGGROO
+BGOPBPGYYRPY
+YYB
+PRO
+RYO
+
+7 step
+
+BBB
+BPP
+GGO
+GGOPOYPBYRRR
+PYPGBYRGOPOY
+OOPGBPBRRGGR
+BYY
+YRO
+YRO
+
+15 steps
+[3, 2, 6, -6, -2, -5, 5, -5, 1, -3, 3, 3, 6, 5, 6]
+
+GOO
+PPB
+RRY
+BYOGGBPGRYYP
+YYOPBOGGBPOR
+GGRBORYYOPBO
+GRB
+PRB
+PRY
+
