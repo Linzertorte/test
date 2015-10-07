@@ -4,13 +4,13 @@ import random
 
 # change seq visulize your rotations
 # press space to watch next rotation
-seq = [random.randint(-5,6) for i in xrange(15)]
-seq = map(lambda x: x-1 if x<=0 else x,seq)
 
-#use this sequence to scramble the rubik
-scramble_seq = [-2, 2, -2, 2, 2, -1, -6, -2, -2, 2, 6, -6, 3, 2, -1]
+# use scramble_seq to scramble the rubik
+scramble_seq = []
+scramble_seq = [random.randint(-5,6) for i in xrange(15)]
+scramble_seq = map(lambda x: x-1 if x<=0 else x,scramble_seq)
 
-#use the seq to demo the solution
+# use seq to solve the rubik, will show each step
 seq = [1,-2,-3,2,6,1,-2]
 print seq
 board = [["YYY",
@@ -113,13 +113,13 @@ def draw_rubik(win):
 
 def print_board():
   global board
-  board = [[''.join(i) for i in f]  for f in board]
-  for i in board[4]:
+  b = [[''.join(i) for i in f]  for f in board]
+  for i in b[4]:
     print i
 
   for i in xrange(3):
-    print board[0][i] + board[1][i] + board[2][i] + board[3][i] 
-  for i in board[5]:
+    print b[0][i] + b[1][i] + b[2][i] + b[3][i] 
+  for i in b[5]:
     print i
 
 def main():
@@ -127,6 +127,7 @@ def main():
     win = GraphWin('Rubik', 400,400) # give title and dimensions
     for x in scramble_seq:
       rotate(x)
+    print_board()
     draw_rubik(win)
     win.getKey()
     for x in seq:
