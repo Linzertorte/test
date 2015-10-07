@@ -1,12 +1,17 @@
 from graphics import *
 import random
 
+
 # change seq visulize your rotations
 # press space to watch next rotation
-#seq = [random.randint(-5,6) for i in xrange(15)]
-#seq = map(lambda x: x-1 if x<=0 else x,seq)
-scramble_seq = []
-seq = [3,-4]
+seq = [random.randint(-5,6) for i in xrange(15)]
+seq = map(lambda x: x-1 if x<=0 else x,seq)
+
+#use this sequence to scramble the rubik
+scramble_seq = [-2, 2, -2, 2, 2, -1, -6, -2, -2, 2, 6, -6, 3, 2, -1]
+
+#use the seq to demo the solution
+seq = [1,-2,-3,2,6,1,-2]
 print seq
 board = [["YYY",
           "YYY",
