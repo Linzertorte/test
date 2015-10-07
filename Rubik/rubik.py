@@ -6,13 +6,13 @@ import random
 # press space to watch next rotation
 
 # use scramble_seq to scramble the rubik
-scramble_seq = []
-scramble_seq = [random.randint(-5,6) for i in xrange(15)]
-scramble_seq = map(lambda x: x-1 if x<=0 else x,scramble_seq)
+scramble_seq = [1, -2, -3, 2, 6, 1, -2]
+#scramble_seq = [random.randint(-5,6) for i in xrange(10)]
+#scramble_seq = map(lambda x: x-1 if x<=0 else x,scramble_seq)
+print scramble_seq
 
 # use seq to solve the rubik, will show each step
-seq = [1,-2,-3,2,6,1,-2]
-print seq
+seq = [2,-1,-6,-2,3,2,-1]
 board = [["YYY",
           "YYY",
           "YYY"],
@@ -141,4 +141,5 @@ def main():
     print_board()
     win.getMouse()
     win.close()
+
 main()
