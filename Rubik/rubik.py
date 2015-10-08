@@ -6,13 +6,13 @@ import random
 # press space to watch next rotation
 
 # use scramble_seq to scramble the rubik
-scramble_seq = [1, -2, -3, 2, 6, 1, -2]
+scramble_seq = []
 #scramble_seq = [random.randint(-5,6) for i in xrange(10)]
 #scramble_seq = map(lambda x: x-1 if x<=0 else x,scramble_seq)
 print scramble_seq
 
 # use seq to solve the rubik, will show each step
-seq = [2,-1,-6,-2,3,2,-1]
+seq = [-6,-4,2,-1,-4,-2,6,3,-4,-6]
 board = [["YYY",
           "YYY",
           "YYY"],
@@ -31,11 +31,30 @@ board = [["YYY",
          ["RRR",
           "RRR",
           "RRR"]]
+board = [["YGB",
+          "WBB",
+          "OOR"],
+         ["WWW",
+          "WWR",
+          "YWY"],
+         ["OOB",
+          "GGR",
+          "ORR"],
+         ["YYR",
+          "YYO",
+          "GYW"],
+         ["BOO",
+          "YRG",
+          "RRG"],
+         ["GGG",
+          "BOB",
+          "BBW"]]
+
 
 colors = {'Y':'yellow',
           'B':'blue',
           'G':'green',
-          'M':'orange',
+          'O':'orange',
           'R':'red',
           'W':'pink'}
 
@@ -131,11 +150,11 @@ def main():
     draw_rubik(win)
     win.getKey()
     for x in seq:
-      rotate(x)
-      draw_rubik(win)
       label = Text(Point(100, 120), str(x))
       label.draw(win)
       win.getKey()
+      rotate(x)
+      draw_rubik(win)
       label.undraw()
       win.flush
     print_board()
