@@ -29,8 +29,13 @@ head = '''<!DOCTYPE html>
    <body>
       <div class="container">
          <h3>第%d课</h3>
+         <div>
+            <audio controls loop>
+               <source src="%02d.m4a"/>
+            </audio>
+         </div>        
          <table class="table">
-            <tbody>'''%i
+            <tbody>'''%(i,i)
 
 tail = '''            </tbody>
          </table>
