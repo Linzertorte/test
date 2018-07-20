@@ -4,7 +4,7 @@ i = 4
 word = ''
 
 words = words.replace('!а','а́').replace('!е','е́').replace('!у','у́').replace('!и','и́').replace('!о','о́')
-words = words.replace('!э','э́').replace('!ы','ы́').replace('!я','я́').replace('!ю','ю́')
+words = words.replace('!э','э́').replace('!ы','ы́').replace('!я','я́').replace('!ю','ю́').replace(':e','ё')
 
 head = '''<!DOCTYPE html>
 <html lang="en">
