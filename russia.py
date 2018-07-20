@@ -24,6 +24,9 @@ head = '''<!DOCTYPE html>
          tr{
             background-color:white;
          }
+         td {
+            word-break: break-all;
+         }         
       </style>
    </head>
    <body>
