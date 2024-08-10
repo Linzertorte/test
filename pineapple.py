@@ -1,15 +1,15 @@
-# Automatic rename 
-
 import sys
 import os
 from PIL import Image
 import glob
+
+name_prefix = ""
+
+start = 1
+
 cat = []
-
-# Modify here, pic name start, which pic id has more than one pictures. 
-start = 100
-
-cat.append((100,2))
+cat.append((2,2))
+#cat.append(())
 #cat.append((2,2))
 
 
@@ -31,7 +31,7 @@ def pic_concat(pics, out_name):
         os.system("rm %s"%pic)
 
 def main():
-    pics = glob.glob("*.png")
+    pics = sorted(glob.glob("*.png"))
     i,j = 0, 0
     cnt = start
     while i < len(pics):
@@ -39,14 +39,14 @@ def main():
             #cat
             cat_pics = []
             for k in range(cat[j][1]):
-                os.system('mv "%s" %04d-%d.png'%(pics[i],cnt,k))
-                cat_pics.append("%04d-%d.png"%(cnt,k))
+                os.system('mv "%s" %s%04d-%d.png'%(pics[i],name_prefix, cnt, k))
+                cat_pics.append("%s%04d-%d.png"%(name_prefix,cnt,k))
                 i += 1
-            pic_concat(cat_pics,"%04d.png"%cnt)
+            pic_concat(cat_pics,"%s%04d.png"%(name_prefix,cnt))
             j += 1
             cnt += 1
         else:
-            os.system('mv "%s" %04d.png'%(pics[i],cnt))
+            os.system('mv "%s" %s%04d.png'%(pics[i],name_prefix,cnt))
             i += 1
             cnt += 1
 
